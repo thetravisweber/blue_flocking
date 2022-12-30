@@ -16,7 +16,7 @@ class Flock {
  
  void drawPretty() {
    for (Boid boid: boids) {
-     boid.drawPretty(); 
+     boid.drawPretty();
    }
  }
  

@@ -6,7 +6,9 @@ class Boid {
   float angle;
   float w = 8;
   float h = 30;
-  float offset = random(1);
+  float offset = random(1000);
+  float view = 100;
+  float farView = width / 5;
   
   Boid() {
     pos = new PVector(random(width), random(height));
@@ -26,7 +28,7 @@ class Boid {
   
   void drawPretty() {
     stroke(0, 137, 255, 5);
-    strokeWeight(2);
+    strokeWeight(1);
     for (Boid friend: f.boids) {
       if (friend.id == this.id) {
         continue; 
@@ -76,8 +78,8 @@ class Boid {
   
   
   void move() {
-     this.interactWithFlock(10);
-     this.goWithTheFlow(2);
+     this.interactWithFlock(1);
+     this.goWithTheFlow(1);
      
      this.update();
   }
@@ -92,9 +94,9 @@ class Boid {
        if (dist < this.h ) {
          this.repel(friend.pos, 100 * strength);
        } else if (dist < 150) {
-         this.repel(friend.pos, 2 * strength);
-       } else if (dist < width/5) {
-        this.target(friend.pos, strength / 5);
+         this.repel(friend.pos, strength / 100);
+       } else if (dist < farView) {
+        this.target(friend.pos, strength / 1000);
        }
      }
   }
