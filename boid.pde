@@ -8,7 +8,8 @@ class Boid {
   float h = 30;
   float offset = random(1000);
   float view = 100;
-  float farView = width / 5;
+  float personalSpace = 30;
+  float farView = width / 2;
   
   Boid() {
     pos = new PVector(random(width), random(height));
@@ -33,7 +34,7 @@ class Boid {
       if (friend.id == this.id) {
         continue; 
       }
-      if (this.pos.dist(friend.pos) < 15) {
+      if (this.pos.dist(friend.pos) < this.personalSpace * 1.5) {
         line(this.pos.x, this.pos.y, friend.pos.x, friend.pos.y);
       }
     }
@@ -79,7 +80,7 @@ class Boid {
   
   void move() {
      this.interactWithFlock(1);
-     this.goWithTheFlow(1);
+     this.goWithTheFlow(4);
      
      this.update();
   }
@@ -91,12 +92,12 @@ class Boid {
        }
        
        float dist = this.pos.dist(friend.pos);
-       if (dist < this.h ) {
-         this.repel(friend.pos, 100 * strength);
-       } else if (dist < 150) {
-         this.repel(friend.pos, strength / 100);
-       } else if (dist < farView) {
-        this.target(friend.pos, strength / 1000);
+       if (dist < this.personalSpace ) {
+         this.repel(friend.pos, 1000 * strength);
+       } else if (dist < this.view) {
+         this.repel(friend.pos, strength);
+       } else if (dist < this.farView) {
+        this.target(friend.pos, strength / 5);
        }
      }
   }

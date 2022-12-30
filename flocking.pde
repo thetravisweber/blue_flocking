@@ -5,14 +5,14 @@ boolean targetMouse = false;
 void setup() {
   size(800, 600);
   fullScreen();
-  f = new Flock(800);
+  f = new Flock(300);
   background(0);
 }
 
 void draw() {
   //background(0);
   f.move();
-  if (frameCount % 2 == 0) {
+  if (frameCount % 1 == 0) {
     f.drawPretty();
   }
   if (targetMouse)
