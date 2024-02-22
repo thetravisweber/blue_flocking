@@ -33,4 +33,8 @@ void keyPressed() {
   if (key == 's') {
     saveFrame("flocking-image-#####.png");
   }
+  
+  if (key == 'r') {
+    background(0);
+  }
 }

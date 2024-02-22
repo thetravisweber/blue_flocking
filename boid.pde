@@ -9,7 +9,7 @@ class Boid {
   float offset = random(1000);
   float view = 100;
   float personalSpace = 30;
-  float farView = width / 2;
+  float farView = 150;
   
   Boid() {
     pos = new PVector(random(width), random(height));
@@ -34,7 +34,7 @@ class Boid {
       if (friend.id == this.id) {
         continue; 
       }
-      if (this.pos.dist(friend.pos) < this.personalSpace * 1.5) {
+      if (this.pos.dist(friend.pos) < this.view) {
         line(this.pos.x, this.pos.y, friend.pos.x, friend.pos.y);
       }
     }
@@ -93,9 +93,9 @@ class Boid {
        
        float dist = this.pos.dist(friend.pos);
        if (dist < this.personalSpace ) {
-         this.repel(friend.pos, 1000 * strength);
+         this.repel(friend.pos, 100 * strength);
        } else if (dist < this.view) {
-         this.repel(friend.pos, strength);
+         this.target(friend.pos, strength);
        } else if (dist < this.farView) {
         this.target(friend.pos, strength / 5);
        }
